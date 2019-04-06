@@ -1,0 +1,67 @@
+@mixin clearfix {
+	&::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin float_grid_rows($num1, $num2) {
+	@if $num2 > 0 {
+		width: calc(( 100% - #{$num2 - 1} * #{$gutter-horizontal}) / #{$num2});
+	} @if $num1 > 1 {
+		width: calc(  #{$num1}  * (( 100% - #{$num2 - 1} * #{$gutter-horizontal}) / #{$num2}) + #{$num1 - 1} * #{$gutter-horizontal});
+	}
+}
+
+@mixin absCenter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+// Media query manager
+// 0 - 600 px
+// 600- 900 px
+// 900 - 1200 px
+// [1200 - 1800 px] is where our normal style working
+// 1800px +
+
+
+// $breakpoint argument choices:
+// - phone
+// - tab-port
+// - tab-land
+// - big-desktop
+
+// ORDER: Base + Typography > general layout + grid > page layout > components
+
+// 1em = 16px
+
+
+@mixin respond($breakpoint) {
+	@if $breakpoint == phone {
+		@media (max-width: 37.5em) { @content }; // 600px = 37.5em 
+	}
+
+	@if $breakpoint == tab-port {
+		@media (max-width: 56.25em) { @content }; // 900px = 56.25em
+	}
+
+	@if $breakpoint == tab-land {
+		@media (max-width: 75em) { @content }; // 1200px = 75em
+	}
+
+	@if $breakpoint == big-desktop {
+		@media (min-width: 112.5em) { @content }; //1800px = 112.5em
+	}
+}
+
+
+
+
+
+
+
+
